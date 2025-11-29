@@ -53,6 +53,11 @@
 
 # ---------------------------------------------
 
+# move run_trankit inside trankit/
+# mv run_trankit.py trankit/
+
+# cd .. --- to running model folder
+
 
 # for cleaned data loadin
 import re

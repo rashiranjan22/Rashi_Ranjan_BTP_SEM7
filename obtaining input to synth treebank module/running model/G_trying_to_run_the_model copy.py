@@ -258,7 +258,22 @@ import torch
 from transformers import AutoTokenizer, AutoModel
 
 # Load encoder from Trankit snapshot
-model_path = "/trankit/cache/xlm-roberta-base/models--xlm-roberta-base/snapshots/e73636d4f797dec63c3081bb6ed5c7b0bb3f2089"
+
+
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+model_path = os.path.join(
+    BASE_DIR,
+    "trankit",
+    "cache",
+    "xlm-roberta-base",
+    "models--xlm-roberta-base",
+    "snapshots",
+    "e73636d4f797dec63c3081bb6ed5c7b0bb3f2089"
+)
 encoder = AutoModel.from_pretrained(model_path)
 
 # Load tokenizer from official xlm-roberta-base
@@ -278,9 +293,12 @@ print("Tokenizer loaded:", type(tokenizer))
 # ================================
 # CONFIGURATION: FILE PATHS
 # ================================
-ALIGNMENT_PATH = "/input/alignment.A3.final"
-HINDI_CONLLU_PATH = "/input/without_shift_hindi_final_merged.conllu"
-BHOJPURI_SYNTH_PATH = "/input/bhojpuri_transferred.conllu"
+
+
+ALIGNMENT_PATH = os.path.join(BASE_DIR, "input", "alignment.A3.final")
+HINDI_CONLLU_PATH = os.path.join(BASE_DIR, "input", "without_shift_hindi_final_merged.conllu")
+BHOJPURI_SYNTH_PATH = os.path.join(BASE_DIR, "input", "bhojpuri_transferred.conllu")
+
 
 print("Using files:")
 print("  Alignments:", ALIGNMENT_PATH)
@@ -301,7 +319,8 @@ print("  Bhojpuri Synth:", BHOJPURI_SYNTH_PATH)
 
 
 # Step 1 — Clean alignment file & parse it
-CLEAN_ALIGN = "/input/alignment.cleaned"
+
+CLEAN_ALIGN = os.path.join(BASE_DIR, "input", "alignment.cleaned")
 alignments = clean_and_parse_alignment(ALIGNMENT_PATH, CLEAN_ALIGN, max_pairs=5000)
 print("\nAlignment Example:", list(alignments.items())[-1])
 
@@ -740,3 +759,6 @@ uas, las = evaluate(gold_test)
 print("FINAL RESULTS:")
 print("UAS:", uas)
 print("LAS:", las)
+
+
+

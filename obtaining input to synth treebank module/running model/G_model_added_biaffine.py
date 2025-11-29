@@ -2,7 +2,7 @@
 # conda create --name my_env python 3.9
 # conda activate my_env
 
-
+# pip install -r requirements.txt
 
 #  cd obtaining input to synth treebank module\running model\trankit
 # # Install in editable mode

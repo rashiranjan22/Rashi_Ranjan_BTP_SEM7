@@ -2,64 +2,24 @@
 # conda create --name my_env python 3.9
 # conda activate my_env
 
-# ! pip install \
-#     trankit==1.1.2 \
-#     numpy==1.26.4 \
-#     transformers==4.48.3 \
-#     adapters==1.1.1
-
-# !pip install conllu
 
 
-# # Clone the repository
-# !git clone https://github.com/nlp-uoregon/trankit.git
-
-# # Go into the project folder
-# %cd trankit
-
-
+#  cd obtaining input to synth treebank module\running model\trankit
 # # Install in editable mode
 # !pip install -e .
-
+# python run_trankit.py
+# -- it creates a cache folder  , which contains the models 
+#  and gives the confirmation that the model works , using an example text
 # cd..
+# now in "running model" folder
+#  run this file 
 
 
 
-# !wget -O bho_test.conllu https://raw.githubusercontent.com/UniversalDependencies/UD_Bhojpuri-BHTB/master/bho_bhtb-ud-test.conllu
+#  paths at , 3 input + 1 input + model path 
 
 
-
-
-# ----------------
-
-# %%writefile run_trankit.py
-
-# from trankit import Pipeline
-
-
-# # initialize a multilingual pipeline
-# p = Pipeline(lang='hindi', gpu=True, cache_dir='./cache')
-
-
-# # Tokenizing an English input
-# en_output = p.tokenize(''' इसके अतिरिक्त गुग्गुल कुंड, भीम गुफा तथा भीमशिला भी दर्शनीय स्थल हैं ।''')
-# print(en_output)
-# en_output = p.posdep(''' इसके अतिरिक्त गुग्गुल कुंड, भीम गुफा तथा भीमशिला भी दर्शनीय स्थल हैं ।''')
-# print(en_output)
-# en_output = p.lemmatize(''' इसके अतिरिक्त गुग्गुल कुंड, भीम गुफा तथा भीमशिला भी दर्शनीय स्थल हैं ।''')
-# print(en_output)
-
-# !python run_trankit.py
-
-# ---------------------------------------------
-
-# move run_trankit inside trankit/
-# mv run_trankit.py trankit/
-
-# cd .. --- to running model folder
-
-
-# for cleaned data loadin
+# for cleaned data loading
 import re
 
 def clean_and_parse_alignment(path, output_path, max_pairs=5000):
@@ -703,7 +663,7 @@ def load_gold_conllu(path):
     print("Total gold sentences:", len(data))
     return data
 
-gold_test = load_gold_conllu("bho_test.conllu")
+gold_test = load_gold_conllu("bho_bhtb-ud-test.conllu")
 
 
 
